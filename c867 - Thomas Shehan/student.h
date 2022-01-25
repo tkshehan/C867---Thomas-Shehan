@@ -33,7 +33,7 @@ public:
 
 private:
 	Student(string id, string firstName, string lastName, string email, string age, vector<int> daysInCourse, DegreeProgram degree);
-	int studentID;
+	string studentId;
 	string firstName;
 	string lastName;
 	string email;

@@ -2,6 +2,10 @@
 #ifndef ROSTER_H
 #define ROSTER_H
 
-// Header file contents
+class Roster {
+public:
+
+private:
+};
 
 #endif

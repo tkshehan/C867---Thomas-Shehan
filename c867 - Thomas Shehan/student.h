@@ -8,6 +8,8 @@ using namespace std;
 
 class Student {
 public:
+	Student(string id, string firstName, string lastName, string email, int age, int days1, int days2, int days3, DegreeProgram degree);
+
 	void setStudentId(string id);
 	string getStudentId() const;
 
@@ -23,7 +25,7 @@ public:
 	void setAge(int age);
 	int getAge() const;
 
-	void setDaysToComplete(vector<int> daysInCourse);
+	void setDaysToComplete(int days1, int days2, int days3);
 	vector<int> getDaysToComplete() const;
 
 	void setDegree(DegreeProgram degree);
@@ -32,7 +34,6 @@ public:
 	void print();
 
 private:
-	Student(string id, string firstName, string lastName, string email, string age, vector<int> daysInCourse, DegreeProgram degree);
 	string studentId;
 	string firstName;
 	string lastName;

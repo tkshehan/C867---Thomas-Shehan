@@ -41,6 +41,8 @@ private:
     int age;
     vector<int> daysToComplete;
     DegreeProgram degree;
+
+    string degreeProgramToString(DegreeProgram degree);
 };
 
 #endif

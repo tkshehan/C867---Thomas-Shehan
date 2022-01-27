@@ -1,7 +1,7 @@
 #pragma once
-#ifndef ROSTER_H
-#define ROSTER_H
+#ifndef DEGREE_H
+#define DEGREE_H
 
-enum DegreeProgram{SECURITY, SOFTWARE, NETWORK};
+enum DegreeProgram{SECURITY, SOFTWARE, NETWORK };
 
 #endif

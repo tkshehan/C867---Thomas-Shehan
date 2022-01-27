@@ -61,10 +61,29 @@ DegreeProgram Student::getDegreeProgram() const {
     return degree;
 }
 
+string Student::degreeProgramToString(DegreeProgram degree) {
+	string results;
+	switch (degree)
+	{
+	case SECURITY:
+		results = "Security";
+		break;
+	case SOFTWARE:
+		results = "Software";
+		break;
+	case NETWORK:
+		results = "Network";
+		break;
+	default:
+		break;
+	}
+
+	return results;
+}
+
 void Student::print() {
     string daysPrint = "{" + to_string(daysToComplete.at(0)) + "," + to_string(daysToComplete.at(1))+ ","+ to_string(daysToComplete.at(2)) + "}";
     cout << studentId << "\t First Name: " << firstName << "\t Last Name: " << lastName << "\t Age: " << age << "\t daysInCourse: "
-        << daysPrint << " Degree Program: " << degree; // Degree may need conversion to string
+        << daysPrint << " Degree Program: " << degreeProgramToString(degree);
     // A1 [tab] First Name: John [tab] Last Name: Smith [tab] Age: 20 [tab]daysInCourse: {35, 40, 55} Degree Program: Security
 }
-

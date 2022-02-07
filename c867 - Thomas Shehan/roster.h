@@ -4,11 +4,15 @@
 #include "degree.h"
 #include "student.h"
 #include <string>
+#include <vector>
+#include <iostream>
 using namespace std;
 
 
 class Roster {
 public:
+    Roster();
+
     void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1,
         int daysInCourse2, int daysInCourse3, DegreeProgram degreeprogram);
     void remove(string studentID);
@@ -27,7 +31,9 @@ private:
         "A4,Erin,Black,Erin.black@comcast.net,22,50,58,40,SECURITY",
         "A5,Thomas,Shehan,[emailaddress],33, [numberofdaystocomplete3courses],SOFTWARE"
     };
-    Student *classRosterArray[];
+    vector<Student> classRosterArray;
+
+    bool validateEmail(string email);
 };
 
 #endif

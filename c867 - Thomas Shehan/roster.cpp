@@ -1,7 +1,5 @@
 #include "roster.h"
 
-
-
 Roster::Roster() {
     this->classRosterArray = vector<Student>(0);
 }

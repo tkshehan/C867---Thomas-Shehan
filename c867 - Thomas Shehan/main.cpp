@@ -2,10 +2,17 @@
 //
 
 #include <iostream>
+#include "roster.h"
 
-int main()
-{
-    std::cout << "Hello World!\n";
+int main() {
+    cout << "initializing, remove this later"; // Remove
+    Roster classRoster;
+    for (int i = 0; i < 5; ++i) {
+        string studentString = classRoster.studentData[i];
+        // Parse Student String
+        // Add it to classRoster
+    }
+    
 }
 
 // Run program: Ctrl + F5 or Debug > Start Without Debugging menu

@@ -54,7 +54,7 @@ void Roster::printAverageDaysInCourse(string studentID) {
 void Roster::printInvalidEmails() {
     for (int i = 0; i < classRosterArray.size(); ++i) {
         string email = classRosterArray.at(i).getEmail();
-        if (!validateEmail(email)) {
+        if (!isValidEmail(email)) {
             cout << email << endl;
         }
     }
@@ -66,8 +66,11 @@ void Roster::printByDegreeProgram(DegreeProgram degreeProgram) {
     cout << "Degree Program Noise, finish this function";
 }
 
-bool Roster::validateEmail(string email) {
+bool Roster::isValidEmail(string email) {
     // Note: A valid email should include an at sign ('@') and period ('.') and should not include a space (' ').
-    // Validate Email
-    return false;
+    bool hasAt = email.find('@');
+    bool hasPeriod = email.find('.');
+    bool hasSpace = email.find(' ');
+
+    return (hasAt && hasPeriod && !hasSpace);
 }

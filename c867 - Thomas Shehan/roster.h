@@ -33,7 +33,7 @@ public:
 
 private:
     vector<Student> classRosterArray;
-    bool validateEmail(string email);
+    bool isValidEmail(string email);
 };
 
 #endif

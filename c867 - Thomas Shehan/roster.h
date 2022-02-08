@@ -21,6 +21,8 @@ public:
 
     Roster();
 
+    vector<Student*> getClassRosterArray();
+
     void add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1,
         int daysInCourse2, int daysInCourse3, DegreeProgram degreeprogram);
     void remove(string studentID);
@@ -32,7 +34,7 @@ public:
 
 
 private:
-    vector<Student> classRosterArray;
+    vector<Student*> classRosterArray;
     bool isValidEmail(string email);
 };
 

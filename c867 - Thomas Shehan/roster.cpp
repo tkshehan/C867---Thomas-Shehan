@@ -1,32 +1,39 @@
 #include "roster.h"
 
 Roster::Roster() {
-    this->classRosterArray = vector<Student>(0);
+    this->classRosterArray =  vector<Student*>(0);
+}
+
+vector<Student*> Roster::getClassRosterArray()
+{
+    return classRosterArray;
 }
 
 void Roster::add(string studentID, string firstName, string lastName, string emailAddress, int age, int daysInCourse1, int daysInCourse2, int daysInCourse3, DegreeProgram degreeprogram) {
-    Student newStudent = Student(studentID, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse1, daysInCourse3, degreeprogram);
+    Student* newStudent = new Student(studentID, firstName, lastName, emailAddress, age, daysInCourse1, daysInCourse2, daysInCourse3, degreeprogram);
     classRosterArray.push_back(newStudent);
 }
 
 void Roster::remove(string studentID) {
     bool foundID = false;
-    for (int i = 0; !foundID || i < classRosterArray.size(); ++i) {
-        if (classRosterArray.at(i).getStudentId() == studentID) {
+    for (int i = 0; !foundID && i < classRosterArray.size(); ++i) {
+        if (classRosterArray.at(i)->getStudentId() == studentID) {
+            delete classRosterArray.at(i);
             classRosterArray.erase(classRosterArray.begin() + i);
             foundID = true;
         }
-    }
+    } 
     if (!foundID) {
-        cout << "Error: StudentID " << studentID <<  " not found";
+        cout << "Error: StudentID " << studentID << " not found" << endl;
     }
 }
 
 void Roster::printAll() {
     for (int i = 0; i < classRosterArray.size(); ++i) {
-        classRosterArray.at(i).print();
+        classRosterArray.at(i)->print();
         cout << endl;
     }
+    cout << endl;
 }
 
 void Roster::printAverageDaysInCourse(string studentID) {
@@ -34,9 +41,9 @@ void Roster::printAverageDaysInCourse(string studentID) {
     vector<int> daysLeft;
     int totalDays = 0;
 
-    for (int i = 0; !foundID || i < classRosterArray.size(); ++i) {
-        if (classRosterArray.at(i).getStudentId() == studentID) {
-            daysLeft = classRosterArray.at(i).getDaysToComplete();
+    for (int i = 0; !foundID && i < classRosterArray.size(); ++i) {
+        if (classRosterArray.at(i)->getStudentId() == studentID) {
+            daysLeft = classRosterArray.at(i)->getDaysToComplete();
             foundID = true;
         }
     }
@@ -45,32 +52,38 @@ void Roster::printAverageDaysInCourse(string studentID) {
         for (int i = 0; i < daysLeft.size(); ++i) {
             totalDays += daysLeft.at(i);
         }
-        cout << "Student " << studentID << " has an average of " << totalDays / daysLeft.size() << " days left.";
+        cout << "Student " << studentID << " has an average of " << totalDays / daysLeft.size() << " days left." << endl;
     } else {
-        cout << "Error: StudentID " << studentID << " not found";
+        cout << "Error: StudentID " << studentID << " not found" << endl;
     }
 }
 
 void Roster::printInvalidEmails() {
+    cout << "Invalid Emails:" << endl;
     for (int i = 0; i < classRosterArray.size(); ++i) {
-        string email = classRosterArray.at(i).getEmail();
+        string email = classRosterArray.at(i)->getEmail();
         if (!isValidEmail(email)) {
             cout << email << endl;
         }
     }
+    cout << endl;
 }
 
 void Roster::printByDegreeProgram(DegreeProgram degreeProgram) {
-    // prints out student information for a degree program specified by an enumerated type.
-    // what is "student information"?
-    cout << "Degree Program Noise, finish this function";
+    for (int i = 0; i < classRosterArray.size(); ++i) {
+        if (classRosterArray.at(i)->getDegreeProgram() == degreeProgram) {
+            classRosterArray.at(i)->print();
+            cout << endl;
+        }
+    }
+    cout <<  endl;
 }
 
 bool Roster::isValidEmail(string email) {
     // Note: A valid email should include an at sign ('@') and period ('.') and should not include a space (' ').
-    bool hasAt = email.find('@');
-    bool hasPeriod = email.find('.');
-    bool hasSpace = email.find(' ');
+    bool hasAt = (email.find('@') != string::npos);
+    bool hasPeriod = (email.find('.') != string::npos);
+    bool hasSpace = (email.find(' ') != string::npos);
 
     return (hasAt && hasPeriod && !hasSpace);
 }

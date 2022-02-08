@@ -1,22 +1,14 @@
-// C867 - Thomas Shehan.cpp : This file contains the 'main' function. Program execution begins and ends there.
-//
-
 #include <iostream>
 #include "roster.h"
 #include "degree.h"
 
-void populateRoster(Roster roster);
-
 int main() {
-    Roster classRoster;
-    populateRoster(classRoster);
+    Roster* classRoster;
+    classRoster = new Roster();
 
-
-}
-
-void populateRoster(Roster roster) {
+    // Populate Roster
     for (int i = 0; i < 5; ++i) {
-        string studentString = roster.studentData[i];
+        string studentString = classRoster->studentData[i];
         vector<string> studentData(9);
         for (int i = 0; i < studentData.size(); ++i) {
             size_t position = studentString.find(',');
@@ -34,18 +26,29 @@ void populateRoster(Roster roster) {
             degree = SECURITY;
         }
 
-        roster.add(studentData.at(0), studentData.at(1), studentData.at(2), studentData.at(3),
+        classRoster->add(studentData.at(0), studentData.at(1), studentData.at(2), studentData.at(3),
             stoi(studentData.at(4)), stoi(studentData.at(5)), stoi(studentData.at(6)), stoi(studentData.at(7)), degree);
     }
+
+    classRoster->printAll();
+    classRoster->printInvalidEmails();
+    
+    // Loop Throught Students and print Average Days
+    vector<Student*> students = classRoster->getClassRosterArray();
+    for (int i = 0; i < students.size(); ++i) {
+        classRoster->printAverageDaysInCourse(students.at(i)->getStudentId());
+    }
+    cout << endl;
+
+
+    classRoster->printByDegreeProgram(SOFTWARE);
+
+    classRoster->remove("A3");
+    classRoster->printAll();
+
+    classRoster->remove("A3");
+    //expected: the above line should print a message saying such a student with this ID was not found.
+
+    delete classRoster;
 }
-
-// Run program: Ctrl + F5 or Debug > Start Without Debugging menu
-// Debug program: F5 or Debug > Start Debugging menu
-
-// Tips for Getting Started: 
-//   1. Use the Solution Explorer window to add/manage files
-//   2. Use the Team Explorer window to connect to source control
-//   3. Use the Output window to see build output and other messages
-//   4. Use the Error List window to view errors
-//   5. Go to Project > Add New Item to create new code files, or Project > Add Existing Item to add existing code files to the project
-//   6. In the future, to open this project again, go to File > Open > Project and select the .sln file
+    

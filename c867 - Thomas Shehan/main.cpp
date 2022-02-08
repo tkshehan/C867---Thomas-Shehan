@@ -3,6 +3,14 @@
 #include "degree.h"
 
 int main() {
+    cout <<
+        "Scripting and Programming - Applications -- C867" << endl <<
+        "Language: C++" << endl <<
+        "Student ID: #001332818" << endl <<
+        "Thomas Shehan" << endl <<
+        endl;
+
+
     Roster* classRoster;
     classRoster = new Roster();
 
